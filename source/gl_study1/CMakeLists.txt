@@ -1,7 +1,6 @@
 # 
 # External dependencies
 # 
-find_package(Qt5 COMPONENTS Widgets Network Core PrintSupport)
 find_package(GLFW REQUIRED)
 
 #
@@ -18,9 +17,6 @@ ENABLE_LANGUAGE(RC)
 SET(CMAKE_RC_COMPILE_OBJECT 
 "<CMAKE_RC_COMPILER> <FLAGS> -O coff <DEFINES> -i <SOURCE> -o <OBJECT>")
 
-
-# Tell CMake to run moc when necessary:
-set(CMAKE_AUTOMOC ON)
 
 # As moc files are generated in the binary dir, tell CMake
 # to always look for includes there:
@@ -45,6 +41,7 @@ file(GLOB headers
 )
 file(GLOB sources
     "${source_path}/*.cpp"
+	"${source_path}/*.c"
 )
 
 # Group source files
@@ -101,9 +98,6 @@ target_link_libraries(${target}
 		ws2_32
 		opengl32
         ${DEFAULT_LIBRARIES}
-        ${Qt5Widgets_LIBRARIES}
-		${Qt5Network_LIBRARIES}
-        ${Qt5PrintSupport_LIBRARIES}
 		${GLFW_LIBRARY}
     )
 
